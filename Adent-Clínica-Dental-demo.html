@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adent Clínica Dental — Propuesta web</title>
+<meta name="description" content="Propuesta de sitio web para Adent Clínica Dental en Zapopan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F3;
+    --cream-2:#F2EEE3;
+    --ink:#1A2421;
+    --ink-soft:#485650;
+    --teal:#1F4B48;
+    --teal-deep:#153634;
+    --teal-light:#3C6E68;
+    --sage:#8FB6A0;
+    --sage-soft:#DCE9DF;
+    --amber:#E3A23C;
+    --amber-deep:#C9812A;
+    --white:#FFFFFF;
+    --line: rgba(26,36,33,0.12);
+    --shadow-soft: 0 10px 30px rgba(21,54,52,0.10);
+    --radius-organic: 42% 58% 61% 39% / 45% 40% 60% 55%;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.12;
+    margin:0 0 .5em;
+    color:var(--teal-deep);
+    letter-spacing:-0.01em;
+  }
+  p{margin:0 0 1em; color:var(--ink-soft); max-width:62ch;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ul{margin:0; padding:0; list-style:none;}
+  section{padding:88px 0;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-size:.8rem;
+    color:var(--teal-light);
+    font-weight:600;
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 26px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:.95rem;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--amber); color:var(--teal-deep);}
+  .btn-primary:hover{background:var(--amber-deep); box-shadow:0 12px 24px rgba(227,162,60,.35);}
+  .btn-outline{background:transparent; border-color:var(--teal); color:var(--teal-deep);}
+  .btn-outline:hover{background:var(--teal); color:var(--white);}
+  .btn-ghost-light{background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.4); color:var(--white);}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.26);}
+
+  /* ===== HEADER ===== */
+  header{
+    position:sticky; top:0; z-index:1000;
+    background:rgba(250,248,243,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-size:1.28rem; font-weight:600; color:var(--teal-deep);}
+  .logo .mark{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--teal); display:flex; align-items:center; justify-content:center;
+  }
+  .nav-links{display:flex; gap:30px; font-size:.94rem; font-weight:500;}
+  .nav-links a{color:var(--ink-soft); transition:color .15s;}
+  .nav-links a:hover{color:var(--teal-deep);}
+  .nav-right{display:flex; align-items:center; gap:18px;}
+  .nav-phone{font-size:.9rem; font-weight:600; color:var(--teal-deep); display:flex; align-items:center; gap:6px;}
+  .burger{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .burger span{display:block; width:24px; height:2px; background:var(--teal-deep); margin:5px 0; transition:.2s;}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:64px 0 90px;
+    background:linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center;
+  }
+  .hero h1{font-size:clamp(2.3rem, 4vw, 3.4rem); max-width:14ch;}
+  .hero .lead{font-size:1.12rem; max-width:44ch; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:36px;}
+  .hero-badges{display:flex; gap:28px; flex-wrap:wrap;}
+  .hero-badge{display:flex; align-items:center; gap:10px; font-size:.86rem; color:var(--ink-soft); font-weight:500;}
+  .hero-badge svg{flex-shrink:0;}
+  .hero-visual{position:relative;}
+  .blob-frame{
+    border-radius:var(--radius-organic);
+    overflow:hidden;
+    box-shadow:var(--shadow-soft);
+    aspect-ratio:4/4.6;
+  }
+  .blob-frame img{width:100%; height:100%; object-fit:cover;}
+  .float-card{
+    position:absolute; bottom:-22px; left:-30px;
+    background:var(--white); border-radius:18px; padding:16px 20px;
+    box-shadow:0 16px 36px rgba(21,54,52,.18);
+    display:flex; align-items:center; gap:12px;
+    animation:floatIn .9s ease .3s both;
+  }
+  .float-card strong{display:block; font-size:1.15rem; color:var(--teal-deep); font-family:'Fraunces',serif;}
+  .float-card span{font-size:.78rem; color:var(--ink-soft);}
+  @keyframes floatIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+
+  /* ===== REPUTACIÓN ===== */
+  .stats{
+    background:var(--teal-deep); color:var(--white); padding:56px 0;
+  }
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:32px; text-align:left;
+  }
+  .stat-num{font-family:'Fraunces',serif; font-size:2.6rem; color:var(--white); margin-bottom:4px; font-weight:500;}
+  .stat-label{font-size:.86rem; color:rgba(255,255,255,.68);}
+  .trust-strip{
+    margin-top:44px; padding-top:36px; border-top:1px solid rgba(255,255,255,.14);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+  }
+  .trust-strip .stars{color:var(--amber); font-size:1.1rem; letter-spacing:2px;}
+  .logos-row{display:flex; gap:26px; align-items:center; flex-wrap:wrap; opacity:.75;}
+  .logos-row img{height:26px; filter:grayscale(1) brightness(2);}
+
+  /* ===== SERVICIOS ===== */
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+    background:var(--line); border:1px solid var(--line); border-radius:24px; overflow:hidden;
+  }
+  .service-card{
+    background:var(--cream); padding:38px 32px; transition:background .2s;
+  }
+  .service-card:hover{background:var(--white);}
+  .service-icon{
+    width:48px; height:48px; border-radius:12px; background:var(--sage-soft);
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:var(--teal);
+  }
+  .service-card h3{font-size:1.18rem; margin-bottom:8px;}
+  .service-card p{font-size:.92rem; margin-bottom:14px;}
+  .service-link{font-size:.85rem; font-weight:600; color:var(--teal-light);}
+
+  /* ===== QUE NECESITAS ===== */
+  .needs{background:var(--sage-soft);}
+  .needs-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  .need-card{
+    background:var(--white); border-radius:20px; padding:30px 24px; cursor:pointer;
+    border:1px solid transparent; transition:border-color .2s, transform .2s;
+    display:flex; flex-direction:column; gap:14px; min-height:220px;
+  }
+  .need-card:hover{border-color:var(--teal); transform:translateY(-4px);}
+  .need-emoji{font-size:1.8rem;}
+  .need-card h3{font-size:1.05rem; margin-bottom:4px;}
+  .need-card p{font-size:.86rem; margin-bottom:0; flex-grow:1;}
+  .need-cta{font-size:.82rem; font-weight:600; color:var(--teal-deep); display:flex; align-items:center; gap:6px;}
+
+  /* ===== POR QUE ELEGIRNOS ===== */
+  .why-row{
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:center; margin-bottom:64px;
+  }
+  .why-row:last-child{margin-bottom:0;}
+  .why-row.reverse{grid-template-columns:1.1fr .9fr;}
+  .why-row.reverse .why-media{order:2;}
+  .why-media img{border-radius:20px; box-shadow:var(--shadow-soft);}
+  .why-num{font-family:'Fraunces',serif; font-size:.95rem; color:var(--sage); font-weight:600; margin-bottom:10px; display:block;}
+  .why-text h3{font-size:1.55rem;}
+  .why-list{margin-top:18px; display:flex; flex-direction:column; gap:10px;}
+  .why-list li{display:flex; gap:10px; font-size:.92rem; color:var(--ink-soft); align-items:flex-start;}
+  .why-list svg{flex-shrink:0; margin-top:3px; color:var(--teal);}
+
+  /* ===== ANTES/DESPUES ===== */
+  .compare-wrap{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:36px;
+  }
+  .compare{
+    position:relative; border-radius:20px; overflow:hidden; box-shadow:var(--shadow-soft);
+    aspect-ratio:5/4; user-select:none;
+  }
+  .compare img{position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;}
+  .compare .after-img{clip-path:inset(0 0 0 50%);}
+  .compare-slider{
+    position:absolute; top:0; bottom:0; left:50%; width:0;
+  }
+  .compare-line{
+    position:absolute; top:0; bottom:0; left:50%; width:2px; background:var(--white);
+    transform:translateX(-1px); box-shadow:0 0 0 4px rgba(255,255,255,.25);
+  }
+  .compare-handle{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:42px; height:42px; border-radius:50%; background:var(--white);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(0,0,0,.25);
+    cursor:ew-resize; color:var(--teal-deep);
+  }
+  .compare-tag{
+    position:absolute; top:14px; font-size:.72rem; font-weight:700; letter-spacing:.03em;
+    background:rgba(26,36,33,.65); color:var(--white); padding:4px 10px; border-radius:100px;
+  }
+  .tag-before{left:14px;}
+  .tag-after{right:14px;}
+  .compare-caption{margin-top:14px; font-size:.85rem; color:var(--ink-soft);}
+  .disclaimer{font-size:.78rem; color:var(--ink-soft); opacity:.75; margin-top:24px;}
+
+  /* ===== EQUIPO ===== */
+  .team-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+  .team-card img{border-radius:18px; aspect-ratio:3/3.4; object-fit:cover; margin-bottom:16px;}
+  .team-card h3{font-size:1.05rem; margin-bottom:2px;}
+  .team-role{font-size:.82rem; color:var(--teal-light); font-weight:600; margin-bottom:8px; display:block;}
+  .team-card p{font-size:.85rem;}
+
+  /* ===== RESEÑAS ===== */
+  .reviews{background:var(--teal-deep); color:var(--white);}
+  .reviews .section-head h2{color:var(--white);}
+  .reviews .section-head p{color:rgba(255,255,255,.7);}
+  .reviews-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .review-card{
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+    border-radius:20px; padding:28px;
+  }
+  .review-stars{color:var(--amber); letter-spacing:2px; margin-bottom:14px; font-size:.95rem;}
+  .review-card p{color:rgba(255,255,255,.85); font-size:.92rem;}
+  .review-author{display:flex; align-items:center; gap:10px; margin-top:18px;}
+  .review-avatar{width:36px; height:36px; border-radius:50%; background:var(--sage); display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'Fraunces',serif; color:var(--teal-deep); font-size:.9rem;}
+  .review-author strong{display:block; font-size:.86rem;}
+  .review-author span{font-size:.74rem; color:rgba(255,255,255,.55);}
+
+  /* ===== CLINICA + MAPA ===== */
+  .clinic-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .clinic-gallery{display:grid; grid-template-columns:1.2fr .8fr; grid-template-rows:1fr 1fr; gap:14px; height:440px;}
+  .clinic-gallery img{width:100%; height:100%; object-fit:cover; border-radius:16px;}
+  .clinic-gallery .g1{grid-row:1/3;}
+  .info-list{margin:26px 0; display:flex; flex-direction:column; gap:16px;}
+  .info-item{display:flex; gap:14px; align-items:flex-start;}
+  .info-icon{width:38px; height:38px; border-radius:10px; background:var(--sage-soft); display:flex; align-items:center; justify-content:center; color:var(--teal); flex-shrink:0;}
+  .info-item strong{display:block; font-size:.92rem; color:var(--teal-deep);}
+  .info-item span{font-size:.86rem; color:var(--ink-soft);}
+  .map-embed{
+    margin-top:26px; border-radius:16px; overflow:hidden; border:1px solid var(--line); aspect-ratio:16/9;
+  }
+  .map-embed iframe{width:100%; height:100%; border:0;}
+
+  /* ===== FAQ ===== */
+  .faq-list{max-width:760px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; padding:22px 4px;
+    display:flex; justify-content:space-between; align-items:center; cursor:pointer;
+    font-family:'Fraunces',serif; font-size:1.05rem; color:var(--teal-deep);
+  }
+  .faq-q .plus{transition:transform .25s ease; flex-shrink:0; margin-left:20px; color:var(--teal);}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a p{padding:0 4px 22px; font-size:.92rem;}
+
+  /* ===== AGENDA ===== */
+  .booking{
+    background:var(--sage-soft);
+    border-radius:32px;
+    padding:64px;
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:56px;
+  }
+  .booking-copy h2{font-size:2rem;}
+  .booking-perks{margin-top:28px; display:flex; flex-direction:column; gap:14px;}
+  .booking-perks li{display:flex; gap:10px; font-size:.9rem; color:var(--ink-soft); align-items:center;}
+  .booking-perks svg{color:var(--teal); flex-shrink:0;}
+  .whatsapp-cta{
+    margin-top:30px; display:inline-flex; align-items:center; gap:10px;
+    background:var(--white); padding:14px 22px; border-radius:100px; font-weight:600; font-size:.9rem;
+    box-shadow:var(--shadow-soft);
+  }
+  .whatsapp-cta svg{color:#25D366;}
+  form.book-form{background:var(--white); border-radius:20px; padding:34px; box-shadow:var(--shadow-soft);}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:.8rem; font-weight:600; color:var(--teal-deep);}
+  .field input, .field select, .field textarea{
+    border:1px solid var(--line); border-radius:10px; padding:12px 14px; font-family:inherit; font-size:.92rem;
+    background:var(--cream); color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:80px;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--teal); outline-offset:1px;}
+  .book-form .btn{width:100%; justify-content:center; margin-top:6px;}
+  .form-note{font-size:.74rem; color:var(--ink-soft); text-align:center; margin-top:12px;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--teal-deep); color:rgba(255,255,255,.75); padding-top:70px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr .8fr .8fr 1fr; gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(255,255,255,.12);}
+  .footer-logo{display:flex; align-items:center; gap:10px; color:var(--white); font-family:'Fraunces',serif; font-size:1.2rem; margin-bottom:14px;}
+  .footer-logo .mark{width:30px; height:30px; border-radius:50%; background:var(--amber); display:flex; align-items:center; justify-content:center;}
+  footer h4{color:var(--white); font-family:'Inter',sans-serif; font-size:.82rem; text-transform:none; font-weight:700; margin-bottom:16px;}
+  footer ul li{margin-bottom:10px; font-size:.86rem;}
+  footer ul li a:hover{color:var(--white);}
+  .footer-social{display:flex; gap:12px; margin-top:16px;}
+  .footer-social a{width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center;}
+  .footer-social a:hover{background:var(--amber); color:var(--teal-deep);}
+  .footer-bottom{padding:22px 0; display:flex; justify-content:space-between; font-size:.78rem; flex-wrap:wrap; gap:10px;}
+
+  /* ===== WHATSAPP FLOTANTE ===== */
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:1200;
+    display:flex; align-items:center; gap:10px;
+  }
+  .wa-tooltip{
+    background:var(--white); padding:10px 16px; border-radius:12px; font-size:.82rem; font-weight:600;
+    box-shadow:var(--shadow-soft); color:var(--ink); white-space:nowrap;
+    opacity:0; transform:translateX(8px); transition:.25s ease; pointer-events:none;
+  }
+  .wa-float:hover .wa-tooltip{opacity:1; transform:translateX(0);}
+  .wa-btn{
+    width:58px; height:58px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px rgba(37,211,102,.45); position:relative; flex-shrink:0;
+  }
+  .wa-btn::after{
+    content:''; position:absolute; inset:0; border-radius:50%; background:#25D366;
+    animation:pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse{0%{transform:scale(1); opacity:.6;} 100%{transform:scale(1.7); opacity:0;}}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px){
+    .nav-links, .nav-phone{display:none;}
+    .burger{display:block;}
+    .hero-grid, .why-row, .why-row.reverse, .clinic-grid{grid-template-columns:1fr; gap:40px;}
+    .why-row.reverse .why-media{order:0;}
+    .stats-grid{grid-template-columns:repeat(2,1fr); row-gap:28px;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .needs-grid{grid-template-columns:1fr 1fr;}
+    .reviews-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr 1fr;}
+    .booking{grid-template-columns:1fr; padding:40px 26px;}
+    .footer-grid{grid-template-columns:1fr 1fr; row-gap:36px;}
+  }
+  @media (max-width: 600px){
+    section{padding:60px 0;}
+    .wrap{padding:0 20px;}
+    .services-grid, .needs-grid, .team-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .compare-wrap{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;}
+    float-card{display:none;}
+  }
+</style>
+</head>
+<body>
+<div style="background:#123f3a;color:#fff;text-align:center;padding:9px 14px;font:600 13px/1.4 Arial,sans-serif;letter-spacing:.2px;position:relative;z-index:9999"><strong>PROPUESTA DE DISEÑO</strong> · Demo personalizada para Adent Clínica Dental · Datos e imágenes pendientes de validación por la clínica</div>
+
+<!-- ===================== HEADER ===================== -->
+<header>
+  <nav class="nav">
+    <a href="#inicio" class="logo">
+      <span class="mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21c-1.2 0-2-1.6-2.3-3.9-.2-1.7-.3-3.6-1.2-3.6-.9 0-1 2-1.3 3.6C6.9 19.4 6.1 21 5 21c-1.7 0-2.5-2.7-2.5-6.4C2.5 8.9 4.8 3 8.6 3c1.4 0 2.1.7 3.4.7S14 3 15.4 3C19.2 3 21.5 8.9 21.5 14.6c0 3.7-.8 6.4-2.5 6.4-1.1 0-1.9-1.6-2.5-3.9-.3-1.6-.4-3.6-1.3-3.6-.9 0-1 1.9-1.2 3.6C13.9 19.4 13.2 21 12 21Z" stroke="white" stroke-width="1.4"/></svg>
+      </span>
+      Adent Clínica Dental
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#resenas">Opiniones</a></li>
+      <li><a href="#clinica">Clínica</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="tel:+523313557383" class="nav-phone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3.9c0-.5.5-1 1-1h3.4c.5 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1L6.6 10.8Z" stroke="#1F4B48" stroke-width="1.4"/></svg>
+        33 1355 7383
+      </a>
+      <a href="#agenda" class="btn btn-primary">Agenda tu cita</a>
+      <button class="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Atención dental en Zapopan</span>
+      <h1>Una sonrisa sana comienza con un equipo en el que puedes confiar</h1>
+      <p class="lead">En Adent combinamos tecnología moderna con un trato cercano, para que cada cita —desde una limpieza hasta un tratamiento completo— se sienta tranquila y clara desde el primer momento.</p>
+      <div class="hero-ctas">
+        <a href="#agenda" class="btn btn-primary">Agenda tu cita en línea</a>
+        <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.6 6.2 6.4.5-4.9 4.3 1.5 6.4L12 16.3 6.4 19.4l1.5-6.4L3 8.7l6.4-.5L12 2Z" fill="#E3A23C"/></svg>
+          [X]/5 en Google ([X] reseñas)
+        </span>
+        <span class="hero-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="#1F4B48" stroke-width="1.4"/></svg>
+          Bioseguridad certificada
+        </span>
+        <span class="hero-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1F4B48" stroke-width="1.4"/><path d="M12 7v5l3 3" stroke="#1F4B48" stroke-width="1.4"/></svg>
+          Citas de urgencia el mismo día
+        </span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="blob-frame">
+        <img src="https://placehold.co/760x880/8FB6A0/153634?text=Foto%3A%20paciente%20sonriendo%20en%20consultorio&font=raleway" alt="Paciente sonriendo en el consultorio — imagen genérica de plantilla">
+      </div>
+      <div class="float-card">
+        <span style="font-size:1.6rem;">🦷</span>
+        <div>
+          <strong>+8,400</strong>
+          <span>tratamientos realizados</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REPUTACIÓN / DATOS ===================== -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">17</div>
+        <div class="stat-label">años atendiendo a la comunidad</div>
+      </div>
+      <div>
+        <div class="stat-num">8,400+</div>
+        <div class="stat-label">tratamientos completados</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9</div>
+        <div class="stat-label">calificación promedio en Google</div>
+      </div>
+      <div>
+        <div class="stat-num">[X]%</div>
+        <div class="stat-label">de pacientes que nos recomiendan</div>
+      </div>
+    </div>
+    <div class="trust-strip">
+      <div class="stars">★★★★★ <span style="color:rgba(255,255,255,.7); font-size:.8rem; letter-spacing:0;">basado en [X] reseñas verificadas</span></div>
+      <div class="logos-row">
+        <img src="https://placehold.co/110x30/153634/FFFFFF?text=Seguro+A&font=raleway" alt="Aseguradora dental A">
+        <img src="https://placehold.co/110x30/153634/FFFFFF?text=Seguro+B&font=raleway" alt="Aseguradora dental B">
+        <img src="https://placehold.co/110x30/153634/FFFFFF?text=Seguro+C&font=raleway" alt="Aseguradora dental C">
+        <img src="https://placehold.co/110x30/153634/FFFFFF?text=Colegio+Dental&font=raleway" alt="Colegio de odontólogos">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICIOS ===================== -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Servicios</span>
+      <h2>Un tratamiento para cada etapa de tu sonrisa</h2>
+      <p style="margin:0 auto;">Desde revisiones de rutina hasta procedimientos especializados, todo bajo un mismo techo y con el mismo equipo dando seguimiento.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21c-1.2 0-2-1.6-2.3-3.9-.2-1.7-.3-3.6-1.2-3.6-.9 0-1 2-1.3 3.6C6.9 19.4 6.1 21 5 21c-1.7 0-2.5-2.7-2.5-6.4C2.5 8.9 4.8 3 8.6 3c1.4 0 2.1.7 3.4.7S14 3 15.4 3C19.2 3 21.5 8.9 21.5 14.6c0 3.7-.8 6.4-2.5 6.4-1.1 0-1.9-1.6-2.5-3.9-.3-1.6-.4-3.6-1.3-3.6-.9 0-1 1.9-1.2 3.6C13.9 19.4 13.2 21 12 21Z" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+        <h3>Odontología general</h3>
+        <p>Limpiezas, revisiones y detección temprana de caries para mantener tu boca sana todo el año.</p>
+        <span class="service-link">Conocer más</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12c2-5 6-8 8-8s6 3 8 8-6 8-8 8-6-3-8-8Z" stroke="#1F4B48" stroke-width="1.4"/><circle cx="12" cy="12" r="2.5" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+        <h3>Estética dental</h3>
+        <p>Blanqueamiento, carillas y diseño de sonrisa para lograr un resultado natural y duradero.</p>
+        <span class="service-link">Conocer más</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="9" width="16" height="6" rx="3" stroke="#1F4B48" stroke-width="1.4"/><circle cx="8" cy="12" r="1.2" fill="#1F4B48"/><circle cx="16" cy="12" r="1.2" fill="#1F4B48"/></svg></div>
+        <h3>Ortodoncia</h3>
+        <p>Brackets metálicos, estéticos y alineadores transparentes según lo que mejor se adapte a tu vida.</p>
+        <span class="service-link">Conocer más</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M8 7h8M8 17h8" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+        <h3>Implantes dentales</h3>
+        <p>Reemplazo fijo de piezas perdidas con planeación digital y materiales de alta durabilidad.</p>
+        <span class="service-link">Conocer más</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+        <h3>Endodoncia</h3>
+        <p>Tratamiento de conducto sin dolor, con anestesia guiada y técnica mínimamente invasiva.</p>
+        <span class="service-link">Conocer más</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="#1F4B48" stroke-width="1.4"/><path d="M5 21c1-4 3.7-6 7-6s6 2 7 6" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+        <h3>Odontopediatría</h3>
+        <p>Atención dental para niños en un ambiente amigable, pensado para quitarles el miedo al dentista.</p>
+        <span class="service-link">Conocer más</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUE NECESITAS ===================== -->
+<section class="needs" id="que-necesitas">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Guía rápida</span>
+      <h2>¿Qué necesitas hoy?</h2>
+      <p>Cuéntanos qué te trae por aquí y te decimos el siguiente paso más directo, sin rodeos.</p>
+    </div>
+    <div class="needs-grid">
+      <div class="need-card">
+        <span class="need-emoji">😟</span>
+        <h3>Me da miedo el dentista</h3>
+        <p>Tenemos sedación consciente y un equipo que explica cada paso antes de hacerlo.</p>
+        <span class="need-cta">Hablar con alguien →</span>
+      </div>
+      <div class="need-card">
+        <span class="need-emoji">✨</span>
+        <h3>Quiero mejorar mi sonrisa</h3>
+        <p>Agenda una valoración de estética dental y te mostramos opciones con simulación digital.</p>
+        <span class="need-cta">Ver estética dental →</span>
+      </div>
+      <div class="need-card">
+        <span class="need-emoji">🚨</span>
+        <h3>Tengo dolor o una urgencia</h3>
+        <p>Reservamos espacios diarios para urgencias. Escríbenos y te damos hora el mismo día.</p>
+        <span class="need-cta">Atención urgente →</span>
+      </div>
+      <div class="need-card">
+        <span class="need-emoji">📋</span>
+        <h3>Solo quiero una revisión</h3>
+        <p>Agenda tu limpieza y chequeo de rutina, sin compromiso de tratamiento adicional.</p>
+        <span class="need-cta">Agendar revisión →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== POR QUE ELEGIRNOS ===================== -->
+<section id="porque">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Por qué elegirnos</span>
+      <h2>Cuidado dental pensado desde tu comodidad</h2>
+    </div>
+
+    <div class="why-row">
+      <div class="why-media">
+        <img src="https://placehold.co/620x460/DCE9DF/153634?text=Foto%3A%20equipo%20con%20tecnolog%C3%ADa%20digital&font=raleway" alt="Tecnología de escaneo digital — imagen genérica">
+      </div>
+      <div class="why-text">
+        <span class="why-num">Tecnología</span>
+        <h3>Diagnóstico digital, sin adivinar</h3>
+        <p>Usamos escáner intraoral y radiografía digital de baja radiación para mostrarte exactamente lo que vemos, antes de proponerte un tratamiento.</p>
+        <ul class="why-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Escáner 3D sin moldes de silicona</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Radiografías digitales de baja dosis</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="why-row reverse">
+      <div class="why-media">
+        <img src="https://placehold.co/620x460/DCE9DF/153634?text=Foto%3A%20sala%20de%20espera%20confortable&font=raleway" alt="Sala de espera confortable — imagen genérica">
+      </div>
+      <div class="why-text">
+        <span class="why-num">Comodidad</span>
+        <h3>Un espacio que no se siente clínico</h3>
+        <p>Salas privadas, música ambiental y opción de audífonos con cancelación de ruido durante tratamientos largos.</p>
+        <ul class="why-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Consultorios privados, no compartidos</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Sedación consciente disponible</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="why-row">
+      <div class="why-media">
+        <img src="https://placehold.co/620x460/DCE9DF/153634?text=Foto%3A%20recepci%C3%B3n%20explicando%20plan%20de%20pago&font=raleway" alt="Explicación de plan de pago — imagen genérica">
+      </div>
+      <div class="why-text">
+        <span class="why-num">Transparencia</span>
+        <h3>Presupuesto claro antes de empezar</h3>
+        <p>Recibes un plan de tratamiento por escrito, con costos y tiempos estimados, además de opciones de pago a meses.</p>
+        <ul class="why-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Sin cargos sorpresa</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Opciones de pago disponibles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ANTES / DESPUES ===================== -->
+<section style="background:var(--cream-2);" id="antes-despues">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Resultados reales</span>
+      <h2>Antes y después</h2>
+      <p style="margin:0 auto;">Desliza el punto central para comparar. Casos reales de pacientes que autorizaron el uso de su imagen.</p>
+    </div>
+    <div class="compare-wrap">
+      <div>
+        <div class="compare" data-compare>
+          <img class="before-img" src="https://placehold.co/700x560/C9C2B0/1A2421?text=ANTES&font=raleway" alt="Antes del tratamiento de ortodoncia">
+          <img class="after-img" src="https://placehold.co/700x560/8FB6A0/153634?text=DESPU%C3%89S&font=raleway" alt="Después del tratamiento de ortodoncia">
+          <div class="compare-line"></div>
+          <div class="compare-handle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <span class="compare-tag tag-before">ANTES</span>
+          <span class="compare-tag tag-after">DESPUÉS</span>
+        </div>
+        <p class="compare-caption">Ortodoncia con alineadores — 14 meses de tratamiento.</p>
+      </div>
+      <div>
+        <div class="compare" data-compare>
+          <img class="before-img" src="https://placehold.co/700x560/C9C2B0/1A2421?text=ANTES&font=raleway" alt="Antes del blanqueamiento dental">
+          <img class="after-img" src="https://placehold.co/700x560/8FB6A0/153634?text=DESPU%C3%89S&font=raleway" alt="Después del blanqueamiento dental">
+          <div class="compare-line"></div>
+          <div class="compare-handle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <span class="compare-tag tag-before">ANTES</span>
+          <span class="compare-tag tag-after">DESPUÉS</span>
+        </div>
+        <p class="compare-caption">Diseño de sonrisa con carillas — 2 sesiones.</p>
+      </div>
+    </div>
+    <p class="disclaimer">Los resultados varían según cada caso clínico. Las imágenes se muestran con autorización del paciente.</p>
+  </div>
+</section>
+
+<!-- ===================== EQUIPO ===================== -->
+<section id="equipo">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Equipo</span>
+      <h2>Las personas detrás de tu sonrisa</h2>
+      <p style="margin:0 auto;">Un equipo con especialidades complementarias, para que no tengas que ir a otro lado a mitad de tratamiento.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://placehold.co/400x460/8FB6A0/153634?text=Foto%3A%20Dra.%20Mar%C3%ADa%20Reyes&font=raleway" alt="Dra. María Reyes">
+        <h3>Dra. María Reyes</h3>
+        <span class="team-role">Directora clínica · Odontología general</span>
+        <p>18 años de experiencia, especialista en rehabilitación oral integral.</p>
+      </div>
+      <div class="team-card">
+        <img src="https://placehold.co/400x460/8FB6A0/153634?text=Foto%3A%20Dr.%20Luis%20Torres&font=raleway" alt="Dr. Luis Torres">
+        <h3>Dr. Luis Torres</h3>
+        <span class="team-role">Ortodoncista</span>
+        <p>Certificado en alineadores transparentes y ortodoncia interceptiva infantil.</p>
+      </div>
+      <div class="team-card">
+        <img src="https://placehold.co/400x460/8FB6A0/153634?text=Foto%3A%20Dra.%20Ana%20Pati%C3%B1o&font=raleway" alt="Dra. Ana Patiño">
+        <h3>Dra. Ana Patiño</h3>
+        <span class="team-role">Endodoncista</span>
+        <p>Enfocada en tratamientos de conducto de mínima molestia con microscopio.</p>
+      </div>
+      <div class="team-card">
+        <img src="https://placehold.co/400x460/8FB6A0/153634?text=Foto%3A%20Dr.%20Iv%C3%A1n%20Ruiz&font=raleway" alt="Dr. Iván Ruiz">
+        <h3>Dr. Iván Ruiz</h3>
+        <span class="team-role">Cirujano · Implantes</span>
+        <p>Especialista en implantología con planeación 3D guiada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RESEÑAS ===================== -->
+<section class="reviews" id="resenas">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="color:var(--sage);">Opiniones</span>
+      <h2>Lo que dicen quienes ya vinieron</h2>
+      <p style="margin:0 auto;">Reseñas reales de Google, sin editar.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Le tenía pánico al dentista desde niña y en Adent me explicaron cada paso antes de tocarme. Ya no falto a mis citas de revisión.</p>
+        <div class="review-author">
+          <div class="review-avatar">C</div>
+          <div><strong>Carla M.</strong><span>Paciente desde 2022</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Me hice los alineadores con el Dr. Torres, el seguimiento mensual fue puntual y el resultado quedó mejor de lo que esperaba.</p>
+        <div class="review-author">
+          <div class="review-avatar">J</div>
+          <div><strong>Jorge P.</strong><span>Ortodoncia</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>Llevé a mi hijo de 6 años y lo trataron con muchísima paciencia. La sala infantil ayuda a que no llore como en otros lados.</p>
+        <div class="review-author">
+          <div class="review-avatar">S</div>
+          <div><strong>Sofía R.</strong><span>Odontopediatría</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLINICA + MAPA ===================== -->
+<section id="clinica">
+  <div class="wrap clinic-grid">
+    <div class="clinic-gallery">
+      <img class="g1" src="https://placehold.co/500x900/F2EEE3/1A2421?text=Foto%3A%20fachada%20de%20la%20cl%C3%ADnica&font=raleway" alt="Fachada de la clínica">
+      <img src="https://placehold.co/500x430/F2EEE3/1A2421?text=Foto%3A%20recepci%C3%B3n&font=raleway" alt="Recepción">
+      <img src="https://placehold.co/500x430/F2EEE3/1A2421?text=Foto%3A%20consultorio&font=raleway" alt="Consultorio">
+    </div>
+    <div>
+      <span class="eyebrow">La clínica</span>
+      <h2>Visítanos en el corazón de Zapopan</h2>
+      <p>A cinco minutos de Plaza Patria, con estacionamiento propio y acceso para personas con movilidad reducida.</p>
+      <div class="info-list">
+        <div class="info-item">
+          <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11.5A7 7 0 0 0 5 9.5C5 14.7 12 21 12 21Z" stroke="#1F4B48" stroke-width="1.4"/><circle cx="12" cy="9.5" r="2.3" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+          <div><strong>Dirección</strong><span>Zapopan, Jalisco</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1F4B48" stroke-width="1.4"/><path d="M12 7v5l3 3" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+          <div><strong>Horario</strong><span>Lun–Vie 9:00–19:00 · Sáb 9:00–14:00</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3.9c0-.5.5-1 1-1h3.4c.5 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1L6.6 10.8Z" stroke="#1F4B48" stroke-width="1.4"/></svg></div>
+          <div><strong>Teléfono</strong><span>33 1355 7383</span></div>
+        </div>
+      </div>
+      <a href="#agenda" class="btn btn-outline">Cómo llegar y agendar</a>
+      <div class="map-embed">
+        <!-- Reemplazar por el iframe real de Google Maps de la clínica -->
+        <img src="https://placehold.co/900x500/DCE9DF/153634?text=Mapa%3A%20insertar%20iframe%20de%20Google%20Maps&font=raleway" alt="Mapa de ubicación — reemplazar con Google Maps">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section style="background:var(--cream-2);" id="faq">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Antes de agendar, resolvamos tus dudas</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q"><span>¿Cuánto cuesta la primera consulta?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>La valoración inicial con diagnóstico y radiografía digital tiene un costo de $450 MXN, que se descuenta si decides iniciar un tratamiento el mismo día.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Aceptan mi seguro dental?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Trabajamos con las principales aseguradoras dentales del país. Escríbenos con el nombre de tu póliza y te confirmamos cobertura antes de tu cita.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Tengo dolor fuerte, ¿me pueden atender hoy?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Sí, reservamos espacios diarios para urgencias. Llámanos o escríbenos por WhatsApp y te damos un horario disponible en las próximas horas.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Ofrecen planes de pago?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Sí, para tratamientos de ortodoncia, implantes y estética dental ofrecemos financiamiento propio hasta en 12 meses sin intereses, sujeto a aprobación.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Puedo cambiar o cancelar mi cita?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Claro, solo pedimos avisar con al menos 24 horas de anticipación por WhatsApp o teléfono para poder reasignar el espacio.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Atienden niños pequeños?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Sí, contamos con odontopediatría desde el primer año de vida, en un consultorio adaptado para que la experiencia sea amigable.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AGENDA TU CITA ===================== -->
+<section id="agenda">
+  <div class="wrap">
+    <div class="booking">
+      <div class="booking-copy">
+        <span class="eyebrow">Agenda tu cita</span>
+        <h2>Reserva tu espacio en menos de un minuto</h2>
+        <p>Llena el formulario y un miembro del equipo confirma tu horario el mismo día hábil. Si prefieres, escríbenos directo por WhatsApp.</p>
+        <ul class="booking-perks">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Confirmación en menos de 24 horas</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Recordatorio automático antes de tu cita</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2"/></svg> Sin costo por cambiar de horario</li>
+        </ul>
+        <a href="https://wa.me/523313557383?text=Hola%2C%20quiero%20agendar%20una%20cita" class="whatsapp-cta" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.5 3.62 1.44 5.13L2 22l5.13-1.53a9.87 9.87 0 0 0 4.9 1.31h.01c5.46 0 9.9-4.45 9.9-9.91C22 6.45 17.5 2 12.04 2Zm5.63 14.05c-.24.66-1.4 1.26-1.93 1.34-.5.08-1.12.11-1.8-.12-.42-.13-.95-.3-1.64-.6-2.88-1.24-4.76-4.12-4.9-4.31-.14-.19-1.17-1.56-1.17-2.98 0-1.42.75-2.11 1.02-2.4.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.14.07.14.11.3.02.48-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.29.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.61-.07.16-.19.7-.81.88-1.09.18-.28.36-.23.6-.14.24.09 1.53.72 1.79.85.26.13.43.19.5.3.07.11.07.63-.17 1.29Z"/></svg>
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+
+      <form class="book-form">
+        <div class="form-row">
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" type="text" placeholder="Tu nombre" required>
+          </div>
+          <div class="field">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" type="tel" placeholder="33 1355 7383" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="servicio">Servicio que buscas</label>
+            <select id="servicio">
+              <option>Revisión general</option>
+              <option>Estética dental</option>
+              <option>Ortodoncia</option>
+              <option>Implantes</option>
+              <option>Endodoncia</option>
+              <option>Odontopediatría</option>
+              <option>Urgencia</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fecha">Fecha preferida</label>
+            <input id="fecha" type="date">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field full">
+            <label for="mensaje">Cuéntanos brevemente qué necesitas (opcional)</label>
+            <textarea id="mensaje" placeholder="Ej. dolor en muela inferior desde hace 2 días"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Solicitar cita</button>
+        <p class="form-note">Al enviar, aceptas que te contactemos para confirmar tu horario. Tus datos no se comparten con terceros.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <span class="mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21c-1.2 0-2-1.6-2.3-3.9-.2-1.7-.3-3.6-1.2-3.6-.9 0-1 2-1.3 3.6C6.9 19.4 6.1 21 5 21c-1.7 0-2.5-2.7-2.5-6.4C2.5 8.9 4.8 3 8.6 3c1.4 0 2.1.7 3.4.7S14 3 15.4 3C19.2 3 21.5 8.9 21.5 14.6c0 3.7-.8 6.4-2.5 6.4-1.1 0-1.9-1.6-2.5-3.9-.3-1.6-.4-3.6-1.3-3.6-.9 0-1 1.9-1.2 3.6C13.9 19.4 13.2 21 12 21Z" stroke="#153634" stroke-width="1.6"/></svg></span>
+          Adent Clínica Dental
+        </div>
+        <p style="max-width:32ch; font-size:.86rem;">Odontología integral con calidez humana, en el corazón de Zapopan desde hace [X] años.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="TikTok">tt</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#equipo">Equipo</a></li>
+          <li><a href="#resenas">Opiniones</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#">Odontología general</a></li>
+          <li><a href="#">Estética dental</a></li>
+          <li><a href="#">Ortodoncia</a></li>
+          <li><a href="#">Implantes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>Av. Patria 1234, Zapopan, Jal.</li>
+          <li>33 1355 7383</li>
+          <li>hola@adent.mx</li>
+          <li>Lun–Vie 9:00–19:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Adent Clínica Dental. Todos los derechos reservados.</span>
+      <span>Aviso de privacidad · Términos y condiciones</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== WHATSAPP FLOTANTE ===================== -->
+<a class="wa-float" href="https://wa.me/523313557383?text=Hola%2C%20tengo%20una%20pregunta" target="_blank" rel="noopener">
+  <span class="wa-tooltip">¿Dudas? Escríbenos</span>
+  <span class="wa-btn">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" style="position:relative;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.5 3.62 1.44 5.13L2 22l5.13-1.53a9.87 9.87 0 0 0 4.9 1.31h.01c5.46 0 9.9-4.45 9.9-9.91C22 6.45 17.5 2 12.04 2Zm5.63 14.05c-.24.66-1.4 1.26-1.93 1.34-.5.08-1.12.11-1.8-.12-.42-.13-.95-.3-1.64-.6-2.88-1.24-4.76-4.12-4.9-4.31-.14-.19-1.17-1.56-1.17-2.98 0-1.42.75-2.11 1.02-2.4.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.14.07.14.11.3.02.48-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.29.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.61-.07.16-.19.7-.81.88-1.09.18-.28.36-.23.6-.14.24.09 1.53.72 1.79.85.26.13.43.19.5.3.07.11.07.63-.17 1.29Z"/></svg>
+  </span>
+</a>
+
+<script>
+  // Menú móvil
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.cssText += open ? '' : 'position:absolute; top:100%; left:0; right:0; flex-direction:column; background:#FAF8F3; padding:20px 32px; gap:16px; border-bottom:1px solid rgba(26,36,33,.12);';
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    if (item.classList.contains('open')) a.style.maxHeight = a.scrollHeight + 'px';
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = 0; });
+      if (!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  // Antes/Después slider
+  document.querySelectorAll('[data-compare]').forEach(box => {
+    const after = box.querySelector('.after-img');
+    const line = box.querySelector('.compare-line');
+    const handle = box.querySelector('.compare-handle');
+    let dragging = false;
+
+    const setPos = (clientX) => {
+      const rect = box.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(4, Math.min(96, pct));
+      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      line.style.left = pct + '%';
+      handle.style.left = pct + '%';
+    };
+
+    box.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+
+    box.addEventListener('touchstart', e => setPos(e.touches[0].clientX));
+    box.addEventListener('touchmove', e => setPos(e.touches[0].clientX));
+  });
+
+  // Header con sombra al hacer scroll
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10 ? '0 4px 20px rgba(21,54,52,.06)' : 'none';
+  });
+</script>
+
+</body>
+</html>
